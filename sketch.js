@@ -1,101 +1,231 @@
+var mColor;
+var oColor;
+var cColor;
+var gColor;
 
-var obj;
-var i = 0;
-var downloaded = false;
-	var tempobj = {
-  // "Question": Q.value(),
-    "Answers" : [
-    // A0().value(), 
-      // A1().value(), 
-      // A2().value(), 
-      // A3().value(), 
-    ]
+var comfortaa;
+
+var Gquestion = "Tragedy + Time = Comedy";
+var Ganswer0 = "testQ0";
+var Ganswer1 = "testQ1";
+var Ganswer2 = "testQ2";
+var Ganswer3 = "testQ3";
+var Gqnumber;
+var rAnswer;
+
+
+function preload() {
+  var url = 'https://raw.githubusercontent.com/TimeMachineGun/' +
+    'timemachinegun.github.io/master/TestQuestions.Json';
+  questionsjson = loadJSON(url);
+  comfortaa = loadFont('Assets/Comfortaa-Regular.ttf');
+
+  console.log("hi");
+}
+
+
+var Player1 = new Player();
+var Player2 = new Player();
+
+var questions = [];
+var players;
+var totalPlayers = 2;
+
+function setup() {
+  
+  textFont(comfortaa);
+  mColor = color(170, 0, 80);
+  dmColor = color(138, 0, 65);
+  cColor = color(24, 16, 173);
+  gColor = color(171, 241, 32);
+  createCanvas(1000, 425);
+  background(mColor);
+  loadQs(); // load all the questions
+  iterate();
+  console.log("questions: " + questions.length);
+}
+
+
+var Qnumber = -1;
+var rando = 0;
+
+function iterate() {
+  
+  if (Qnumber < questions.length - 1)
+  {
+  
+  Qnumber += 1;
+  }
+
+  console.log("iterating " + Qnumber);
+
+  Gquestion = questions[Qnumber].q;
+  Ganswer0 = questions[Qnumber].a0;
+  Ganswer1 = questions[Qnumber].a1;
+  Ganswer2 = questions[Qnumber].a2;
+  Ganswer3 = questions[Qnumber].a3;
+  rando = getRandomInt(0, 4);
+  console.log("rando is " + rando);
+  rAnswer = rando;
+  if (rando == 0) {
+    return;
+  }
+  if (rando == 1) {
+    Ganswer0 = questions[Qnumber].a1;
+    Ganswer1 = questions[Qnumber].a0;
+  }
+  if (rando == 2) {
+    Ganswer0 = questions[Qnumber].a2;
+    Ganswer2 = questions[Qnumber].a0;
+  }
+  if (rando == 3) {
+    Ganswer0 = questions[Qnumber].a3;
+    Ganswer3 = questions[Qnumber].a0;
+  }
+}
+
+function draw() {
+
+//   background(153);
+
+  drawBoxes();
+  drawWords();
+  
+  // console.log("test");
+  if (Player1.a != null && Player2.a != null) {
+    console.log("both have ansered");
+    testAnswers();
+  iterate();
+  }
+
+}
+
+function Question() {
+  this.q = "What is the answer?";
+  // this.a = ["a1","a2","a3","a4"];
+  this.a0 = "a0";
+  this.a1 = "a1";
+  this.a2 = "a2";
+  this.a3 = "a3";
+}
+
+function Player() {
+  // this.answered = false;
+  this.keys = [];
+  this.a = null;
+  this.score = 0;
+}
+
+function drawBoxes() {
+
+  stroke(3, 3, 3, 20);
+  strokeWeight(6);
+  // noStroke();
+  strokeJoin(ROUND);
+  fill(dmColor);
+  rect(50, 125, 425, 100);
+
+  rect(525, 125, 425, 100);
+
+  rect(50, 275, 425, 100);
+
+  rect(525, 275, 425, 100);
+  noStroke();
+  fill(30, 30, 30);
+  rect(0, 0, width, 75);
+}
+
+function drawWords() {
+
+  stroke(0, 0, 0);
+  strokeWeight(0);
+  fill(240, 240, 240);
+  textSize(35);
+  textAlign(CENTER, CENTER);
+  text(Gquestion, width / 2, 75 / 2)
+
+  fill(240, 240, 240);
+  textSize(35);
+  text(Ganswer0, 50 + (425 / 2), 175)
+
+  fill(240, 240, 240);
+  textSize(35);
+  text(Ganswer1, 525 + (425 / 2), 175)
+
+  fill(240, 240, 240);
+  textSize(35);
+  text(Ganswer2, 50 + (425 / 2), 325)
+
+
+  fill(240, 240, 240);
+  textSize(35);
+  text(Ganswer3, 525 + (425 / 2), 325)
+  
+  
+  textAlign(LEFT, CENTER);
+  fill(240, 240, 178);
+  textSize(30);
+  text(Player1.score, 25, 35)
+  
+  textAlign(RIGHT, CENTER);
+  fill(240, 240, 178);
+  textSize(30);
+  text(Player2.score, 975, 35)
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
+function testAnswers() {
+  console.log("testing Answers");
+  if (Player1.a == rAnswer) {
+    Player1.score += 100;
   }
   
-function setup() {
-	frameRate(20);
-  createCanvas(1,1);
   
-  var inp0 = createInput('');
-  inp0.position(10,10);
-  var inp1 = createInput('');
-  inp1.position(10,40);
-  var inp2 = createInput('');
-  inp2.position(10,70);
-  var inp3 = createInput('');
-  inp3.position(10,100);
-  var inp4 = createInput('');
-  inp4.position(10,130);
-  inp0.input(Q);
-  inp1.input(A0);
-  inp2.input(A1);
-  inp3.input(A2);
-  inp4.input(A3);
-	button = createButton('Submit Question');
-  button.position(20, 160);
-  button.mousePressed(saveQ);
-	
-	dbutton = createButton('Download');
-	dbutton.position(20, 190);
-	dbutton.mousePressed(download);
-  
-  obj = {"Name":"TestQuiz","Questions":[
-  
-  ]
-        }
+  if (Player2.a == rAnswer) {
+    Player2.score += 100;
+  }
+
+  Player1.a = null;
+  Player2.a = null;
 }
 
-function saveQ(){
+function keyPressed() {
 
-  obj.Questions[i] = tempobj;
-  i++;
-  // Q().value;
-}
+  switch (key) {
+    case 'Q':
+      Player1.a = 0;
+      break;
+    case 'W':
+      Player1.a = 1;
+      break;
+    case 'A':
+      Player1.a = 2;
+      break;
+    case 'S':
+      Player1.a = 3;
+      break;
 
 
-function Q() {
-  // console.log('you are typing: ', this.value());
-  tempobj.Question = this.value();
-}
-function A0() {
-  // console.log('you are typing: ', this.value());
-  tempobj.Answers[0] = this.value();
-}
-function A1() {
-  // console.log('you are typing: ', this.value());
-  tempobj.Answers[1] = this.value();
-}
-function A2() {
-  // console.log('you are typing: ', this.value());
-  tempobj.Answers[2] = this.value();
-}
-function A3() {
-  // console.log('you are typing: ', this.value());
-  tempobj.Answers[3] = this.value();
-}
+    case 'I':
+      Player2.a = 0;
+      break;
+    case 'O':
+      Player2.a = 1;
+      break;
+    case 'K':
+      Player2.a = 2;
+      break;
+    case 'L':
+      Player2.a = 3;
+      break;
+  }
+  console.log(Player1.a);
 
-function draw() { 
-  // framerate(20);
-  background(220);
-  // print(obj);
-}
-
-function download() {
-  
-  
-  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
-var dlAnchorElem = document.getElementById('downloadAnchorElem');
-dlAnchorElem.setAttribute("href",     dataStr     );
-dlAnchorElem.setAttribute("download", obj.Name + ".json");
-dlAnchorElem.click();
-  
-//   var fs = require("fs");
-// fs.writeFile("./object.json", JSON.stringify(obj), (err) => {
-//     if (err) {
-//         console.error(err);
-//         return;
-//     }
-//     console.log("File has been created");
-// });
-  
+  console.log(Player2.a);
+  return false; // prevent any default behaviour
 }
