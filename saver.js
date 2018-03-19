@@ -17,17 +17,18 @@ function setup() {
 	frameRate(20);
 	
 noCanvas();
-  
+  let xPos = (windowWidth-1000)/2;
   var inp0 = createInput('');
-  inp0.position(10,10);
+  inp0.position(xPos,10);
+  
   var inp1 = createInput('');
-  inp1.position(10,40);
+  inp1.position(xPos,40);
   var inp2 = createInput('');
-  inp2.position(10,70);
+  inp2.position(xPos,70);
   var inp3 = createInput('');
-  inp3.position(10,100);
+  inp3.position(xPos,100);
   var inp4 = createInput('');
-  inp4.position(10,130);
+  inp4.position(xPos,130);
   inp0.input(Q);
   inp1.input(A0);
   inp2.input(A1);
@@ -38,7 +39,7 @@ noCanvas();
   button.mousePressed(saveQ);
 	
 	dbutton = createButton('Download');
-	dbutton.position(20, 190);
+	dbutton.position(xPos+10, 190);
 	dbutton.mousePressed(download);
   
   obj = {"Name":"TestQuiz","Questions":[
