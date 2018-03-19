@@ -12,7 +12,7 @@ var downloaded = false;
     ]
   }	
   
-function setup() {/
+function setup() {
 
 	frameRate(20);
 	
