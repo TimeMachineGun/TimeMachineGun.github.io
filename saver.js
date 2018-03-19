@@ -10,11 +10,13 @@ var downloaded = false;
       // A2().value(), 
       // A3().value(), 
     ]
-  }
+  }	
   
-function setup() {
+function setup() {/
+
 	frameRate(20);
-  createCanvas(1,1);
+	
+noCanvas();
   
   var inp0 = createInput('');
   inp0.position(10,10);

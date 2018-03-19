@@ -5,24 +5,26 @@ var gColor;
 
 var comfortaa;
 
-var Gquestion = "Tragedy + Time = Comedy";
+var Gquestion = "Questions did not load properly";
 var Ganswer0 = "testQ0";
 var Ganswer1 = "testQ1";
 var Ganswer2 = "testQ2";
 var Ganswer3 = "testQ3";
 var Gqnumber;
 var rAnswer;
+var url;
 
+var loaded = false;
 
 function preload() {
-  var url = 'https://raw.githubusercontent.com/TimeMachineGun/' +
-    'timemachinegun.github.io/master/TestQuestions.Json';
-  questionsjson = loadJSON(url);
-  comfortaa = loadFont('Assets/Comfortaa-Regular.ttf');
-
-  console.log("hi");
+  //var url = 'https://raw.githubusercontent.com/TimeMachineGun/' +
+    //'timemachinegun.github.io/master/TestQuestions.Json';
+  //questionsjson = loadJSON(url);
+  comfortaa = loadFont('https://raw.githubusercontent.com/TimeMachineGun/timemachinegun.github.io/master/Assets/Comfortaa-Regular.ttf');
+  //comfortaa = loadFont('assets/Comfortaa-Regular.ttf');
+  
+  //console.log("hi");
 }
-
 
 var Player1 = new Player();
 var Player2 = new Player();
@@ -31,20 +33,61 @@ var questions = [];
 var players;
 var totalPlayers = 2;
 
+
+
+
 function setup() {
+	
+  if (window.File && window.FileReader && window.FileList && window.Blob) {
+    console.log('Great success! All the File APIs are supported');
+  } else {
+    alert('The File APIs are not fully supported in this browser.');
+}
+
+
+  var fileInput = createInput();
+  // Set attribute to file
+fileInput.attribute('type','file');
+  // If a file is selected this event will be triggered
+fileInput.elt.addEventListener('change', handleFileSelect, false);
+var list = createElement('ol','');
+ function handleFileSelect(evt) {    
+    
+    // A FileList
+    var files = evt.target.files;
+    // Show some properties
+    for (var i = 0, f; f = files[i]; i++) {
+      var file = createElement('li',f.name + ' ' + f.type + ' ' + f.size + ' bytes');
+      file.parent(list);
+      
+      // Read the file and process the result
+      var reader = new FileReader();
+      reader.readAsText(f);
+      reader.onload = function(e) {
+		questionsjson = JSON.parse( e.target.result );
+        
+        
+  loaded=true;
+		questionsjson = JSON.parse( e.target.result );
   
+  background(mColor);
+  loadQs(); // load all the questions
+  iterate();
+  console.log("questions: " + questions.length);
+        
+      }
+    }
+}
+
+
+  frameRate(60);
   textFont(comfortaa);
   mColor = color(170, 0, 80);
   dmColor = color(138, 0, 65);
   cColor = color(24, 16, 173);
   gColor = color(171, 241, 32);
   createCanvas(1000, 425);
-  background(mColor);
-  loadQs(); // load all the questions
-  iterate();
-  console.log("questions: " + questions.length);
 }
-
 
 var Qnumber = -1;
 var rando = 0;
@@ -85,7 +128,7 @@ function iterate() {
 }
 
 function draw() {
-
+if (loaded){
 //   background(153);
 
   drawBoxes();
@@ -97,7 +140,7 @@ function draw() {
     testAnswers();
   iterate();
   }
-
+}
 }
 
 function Question() {
@@ -195,6 +238,8 @@ function testAnswers() {
 }
 
 function keyPressed() {
+	
+if (loaded){
 
   switch (key) {
     case 'Q':
@@ -228,4 +273,5 @@ function keyPressed() {
 
   console.log(Player2.a);
   return false; // prevent any default behaviour
+  }
 }
