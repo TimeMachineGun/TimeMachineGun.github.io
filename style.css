@@ -53,3 +53,6 @@ h1 {
 p {
 	text-align: center;
 }
+img {
+  image-rendering: crisp-edges;
+}
