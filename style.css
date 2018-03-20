@@ -36,6 +36,17 @@ nav {
 	padding: 5px;
 }
 
+.left {
+	width: 600px;	
+	font: 20px Arial;
+	color: gray;
+}
+.right {
+	width: 600px;                                                                 
+	font: 20px Arial;
+	color: gray;
+position: relative;
+}
 li a {
 	color: white;
 }
