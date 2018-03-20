@@ -27,7 +27,6 @@ body {
 	width: 1000px;
 	margin-left: auto;
 	margin-right: auto;
-	font-family: 'Open Sans', sans-serif;
 	background-color: #f9ffff;
 	background: url("doodles.png");
 }
@@ -54,6 +53,7 @@ h1 {
 
 p {
 	text-align: center;
+	font-family: 'Open Sans', sans-serif;
 }
 img {
   image-rendering: crisp-edges;
