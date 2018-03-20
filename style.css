@@ -52,6 +52,8 @@ h1 {
 }
 
 p {
+	
+	width: 1000px;
 	text-align: center;
 	
 	background-color: #f9ffff;
