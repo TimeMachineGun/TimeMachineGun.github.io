@@ -61,13 +61,13 @@ noCanvas();
 }
 
 function saveQ(){
+  obj.Questions.push(JSON.parse(JSON.stringify(tempobj));
+	
 	inp0.value('');
 	inp1.value('');
 	inp2.value('');
 	inp3.value('');
 	inp4.value('');
-  obj.Questions[i] = tempobj;
-  i++;
   // Q().value;
 }
 
@@ -104,7 +104,7 @@ function download() {
   
   var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
 var dlAnchorElem = document.getElementById('downloadAnchorElem');
-dlAnchorElem.setAttribute("href",     dataStr     );
+dlAnchorElem.setAttribute("href",dataStr);
 dlAnchorElem.setAttribute("download", obj.Name + ".json");
 dlAnchorElem.click();
   
