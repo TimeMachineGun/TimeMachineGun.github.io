@@ -27,7 +27,7 @@ body {
 	width: 1000px;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: #f9ffff;
+	background-color: #ffffff;
 	background: url("doodles.png");
 }
 
@@ -67,7 +67,7 @@ p {
 	width: 1000px;
 	text-align: center;
 	
-	background-color: #f9ffff;
+	background-color: #ffffff;
 	font-family: 'Open Sans', sans-serif;
 }
 img {

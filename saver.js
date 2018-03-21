@@ -1,4 +1,9 @@
 
+  var inp0;
+  var inp1;
+  var inp2;
+  var inp3;
+  var inp4;
 var obj;
 var i = 0;
 var downloaded = false;
@@ -18,28 +23,35 @@ function setup() {
 	
 noCanvas();
   let xPos = (windowWidth-1000)/2;
-  var inp0 = createInput('');
-  inp0.position(xPos,10);
-  
-  var inp1 = createInput('');
-  inp1.position(xPos,40);
-  var inp2 = createInput('');
-  inp2.position(xPos,70);
-  var inp3 = createInput('');
-  inp3.position(xPos,100);
-  var inp4 = createInput('');
-  inp4.position(xPos,130);
+  let yPos = 200;
+	inp0 = createInput('');
+  inp1 = createInput('');
+  inp2 = createInput('');
+  inp3 = createInput('');
+  inp4 = createInput('');
+  inp0.position(xPos,yPos);
+	inp0.size(450,15);
+  yPos+=30;
+  inp1.position(xPos,yPos);
+  yPos+=30;
+  inp2.position(xPos,yPos);
+  yPos+=30;
+  inp3.position(xPos,yPos);
+  yPos+=30;
+  inp4.position(xPos,yPos);
+  yPos+=30;
   inp0.input(Q);
   inp1.input(A0);
   inp2.input(A1);
   inp3.input(A2);
   inp4.input(A3);
 	button = createButton('Submit Question');
-  button.position(20, 160);
+  button.position(xPos+10, yPos);
   button.mousePressed(saveQ);
+  yPos+=30;
 	
 	dbutton = createButton('Download');
-	dbutton.position(xPos+10, 190);
+	dbutton.position(xPos+10, yPos);
 	dbutton.mousePressed(download);
   
   obj = {"Name":"TestQuiz","Questions":[
@@ -49,7 +61,11 @@ noCanvas();
 }
 
 function saveQ(){
-
+	inp0.value('');
+	inp1.value('');
+	inp2.value('');
+	inp3.value('');
+	inp4.value('');
   obj.Questions[i] = tempobj;
   i++;
   // Q().value;
