@@ -61,7 +61,7 @@ noCanvas();
 }
 
 function saveQ(){
-  obj.Questions.push(JSON.parse(JSON.stringify(tempobj));
+  obj.Questions.push(JSON.parse(JSON.stringify(tempobj)));
 	
 	inp0.value('');
 	inp1.value('');
